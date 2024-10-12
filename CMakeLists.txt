@@ -5,6 +5,11 @@ project(nomad-engine VERSION 0.0.1)
 set(SOURCES
     src/main.cpp
     src/glad.c
+    src/nomad-engine/engine.cpp
+    src/nomad-engine/scene.cpp
+    src/nomad-engine/texture.cpp
+    src/nomad-engine/engine.cpp
+    src/nomad-engine/resource_manager.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
