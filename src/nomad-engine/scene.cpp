@@ -1,4 +1,4 @@
-#include "scene.h"
+#include "nomad-engine/scene.h"
 
 Scene::Scene() : root(nullptr) {}
 

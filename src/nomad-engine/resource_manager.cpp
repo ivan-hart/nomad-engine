@@ -1,4 +1,4 @@
-#include "resource_manager.h"
+#include "nomad-engine/resource_manager.h"
 
 void ResourceManager::unloadAll()
 {

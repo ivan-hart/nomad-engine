@@ -1,4 +1,4 @@
-#include "engine.h"
+#include <nomad-engine/engine.h>
 #include <memory>
 
 class Square : public Node

@@ -1,10 +1,13 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include "nomad-engine/scene.h"
+#include "nomad-engine/resource_manager.h"
+
+#include <glad/glad.h>
 #include <SDL2/SDL.h>
-#include <GL/glew.h>
-#include "scene.h"
-#include "resource_manager.h"
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_opengl.h>
 
 class Engine {
 public:

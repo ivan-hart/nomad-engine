@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <memory>
 #include <string>
-#include "resource.h"
+#include "nomad-engine/resource.h"
 
 class ResourceManager
 {

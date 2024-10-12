@@ -1,18 +1,18 @@
-#include "node.h"
+#include "nomad-engine/node.h"
 
 Node::Node(const std::string &name)
 {
     this->setName(name);
 }
 
-std::unique_ptr<Node> Node::getParent()
+Node* Node::getParent()
 {
-    return std::make_unique<Node>(this->parent);
+    return this->parent;
 }
 
-void Node::setParent(std::shared_ptr<Node> parent)
+void Node::setParent(Node* parent)
 {
-    this->parent = std::make_unique<Node>(parent);
+    this->parent = parent;
 }
 
 void Node::render()
@@ -28,42 +28,49 @@ void Node::update(float dt)
 // adds a child as long as it doesnt exist in the children vector or if the name isn't a duplicate
 bool Node::addChild(std::shared_ptr<Node> child)
 {
-    for (auto node = children.begin(); node != children.end();)
+    for (const auto& node : children)
     {
-        if ((*node)->getName() == child->getName() || (*node) == child)
+        if (node->getName() == child->getName() || node == child)
             return false;
     }
     children.push_back(child);
+    child->setParent(this);
     return true;
 }
 
 // removes a node from the children vector
 bool Node::removeChild(std::shared_ptr<Node> child)
 {
-    for (auto node = children.begin(); node != children.end();)
+    auto it = std::find_if(children.begin(), children.end(),
+        [&child](const std::shared_ptr<Node>& node) {
+            return node.get() == child.get();
+        });
+
+    if (it != children.end())
     {
-        if (child == (*node))
-        {
-            std::cout << "Node deleted\n";
-            children.erase(node);
-            return true;
-        }
+        std::cout << "Node deleted\n";
+        (*it)->setParent(nullptr);
+        children.erase(it);
+        return true;
     }
+
     std::cout << "Node not found\n";
     return false;
 }
 
+
 // returns a refrence of a node in the children vector by name
 std::shared_ptr<Node> Node::getChild(const std::string &name)
 {
-    for (auto node = children.begin(); node != children.end();)
+    for (const auto& node : children)
     {
-        if (this->name == (*node)->name)
+        if (node->getName() == name)
         {
             std::cout << "Returning node: " << name << std::endl;
-            return (*node);
+            return node;
         }
     }
+    return nullptr;
 }
 
 // returns the name of this node
@@ -73,9 +80,10 @@ const std::string Node::getName()
 }
 
 // sets the name of the current node as long as its not empty
-void Node::setName(const std::string name)
+void Node::setName(const std::string& name)
 {
-    if (name == "")
-        ;
-    this->name = name;
+    if (!name.empty())
+    {
+        this->name = name;
+    }
 }

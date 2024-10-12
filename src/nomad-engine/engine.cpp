@@ -1,4 +1,4 @@
-#include "engine.h"
+#include "nomad-engine/engine.h"
 #include <iostream>
 
 Engine::Engine() : window(nullptr), glContext(nullptr), isRunning(false) {}
@@ -13,6 +13,12 @@ bool Engine::initialize()
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
+        return false;
+    }
+
+    if (!IMG_Init(IMG_INIT_PNG))
+    {
+        std::cerr << "SDL_image could not initalize! SDL_Error: " << IMG_GetError() << std::endl;
         return false;
     }
 

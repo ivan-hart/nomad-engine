@@ -5,6 +5,7 @@ project(nomad-engine VERSION 0.0.1)
 set(SOURCES
     src/main.cpp
     src/glad.c
+    src/nomad-engine/node.cpp
     src/nomad-engine/engine.cpp
     src/nomad-engine/scene.cpp
     src/nomad-engine/texture.cpp
@@ -27,5 +28,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     ${SDL2_LIBRARIES}
+    ${SDL2_IMAGE_LIBRARIES}
     ${OPENGL_LIBRARIES}
 )

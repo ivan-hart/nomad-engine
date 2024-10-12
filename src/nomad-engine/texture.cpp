@@ -1,4 +1,4 @@
-#include "texture.h"
+#include "nomad-engine/texture.h"
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
