@@ -22,7 +22,7 @@ bool Engine::initialize()
         return false;
     }
 
-    window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
     if (window == nullptr)
     {
         std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
